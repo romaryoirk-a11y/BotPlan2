@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: tg-reminder-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: BOT_TOKEN
+        sync: false        # задайте вручную в дашборде Render
+      - key: MONGO_URI
+        sync: false        # строка подключения MongoDB Atlas
+      - key: MONGO_DB
+        value: tg_reminder_bot
+      - key: DEFAULT_TZ_OFFSET
+        value: "3"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
